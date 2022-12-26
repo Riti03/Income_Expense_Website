@@ -1,25 +1,58 @@
 {% extends 'base.html' %} 
 
 {% block content %}
-<div class="container">
-  {% include 'partials/messages.html'%}
-<h1>Expense List</h1>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-10">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="">Expenses</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">My Expenses</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col-md-2">
+      <a href="/addexpense" class="btn btn-primary">Add Expense</a>
+    </div>
+  </div>
 
-<ul class="list-group">
-  <li class="list-group-item">Bought Mercedes</li>
-  <li class="list-group-item">Bought Mercedes</li>
-  <li class="list-group-item">Bought Mercedes</li>
-  <li class="list-group-item">Bought Mercedes</li>
-  <li class="list-group-item">Bought Mercedes</li>
-  <li class="list-group-item">Bought Mercedes</li>
-  <li class="list-group-item">Bought Mercedes</li>
-  <li class="list-group-item">Bought Mercedes</li>
-  <li class="list-group-item">Bought Mercedes</li>
-  <li class="list-group-item">Bought Mercedes</li>
-  <li class="list-group-item">Bought Mercedes</li>
-  <li class="list-group-item">Bought Mercedes</li>
-  <li class="list-group-item">Bought Mercedes</li>
-</ul>
+  <div class="container">
+    {% include 'partials/_messages.html'%} {% if expenses.count %}
+
+
+
+
+
+
+    <table class="table table-stripped table-hover">
+      <thead>
+        <tr>
+          <th>Amount (currency)</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for expense in expenses%}
+        <tr>
+          <td>{{expense.amount}}</td>
+          <td>{{expense.category}}</td>
+          <td>{{expense.description}}</td>
+          <td>{{expense.date}}</td>
+          <td>
+            <a href="/edit-expense/{{expense.id}}" class="btn btn-secondary btn-sm">Edit</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+
 </div>
 
 
