@@ -29,7 +29,7 @@
     <div class="card">
         <div class="card-body">
           <form action="/edit-expense/{{expense.id}}" method="post">
-            {% include 'partials/_messages.html'%} {% csrf_token %}
+            {% include 'partials/messages.html'%} {% csrf_token %}
             <div class="form-group">
               <label for="">Amount</label>
               <input type="text" class="form-control form-control-sm" name="amount" value="{{values.amount}}"/>
