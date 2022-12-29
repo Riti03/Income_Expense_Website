@@ -29,7 +29,7 @@ def index(request):
     page_obj = Paginator.get_page(paginator, page_number)
     # currency = UserPreference.objects.get(user=request.user).currency
     context = {
-        'income': income,
+        'income': income, 
         'page_obj': page_obj,
         # 'currency': currency
     }

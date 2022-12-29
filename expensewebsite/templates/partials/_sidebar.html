@@ -10,7 +10,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/expense">
+          <a class="nav-link" id="forexpenseurl" href="http://localhost:8000/">
             <span data-feather="file" class="align-text-bottom"></span>
             Expense
           </a>
@@ -31,7 +31,7 @@
       </h6>
       <ul class="nav flex-column mb-2">
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="/stats">
             <span data-feather="file-text" class="align-text-bottom"></span>
             Expense Summary
           </a>
@@ -72,3 +72,11 @@
 
     </div>
   </nav>
+
+  <!-- <script>
+    window.onload=function(){
+      var url = window.location.host;
+      console.log(url)
+      document.getElementById('forexpenseurl').href = url;
+    }
+  </script> -->
