@@ -16,10 +16,16 @@
     padding: 0px !important;
   }
   
+
+  input[value="Log in"] {
+    width: 100%;
+    background: rgb(0, 62, 69);
+  }
+
   input[type="submit"],
   input[type="button"],
   .submit-row input {
-    width: 100%;
+    /* width: 100%; */
     background: rgb(0, 62, 69);
   }
   
