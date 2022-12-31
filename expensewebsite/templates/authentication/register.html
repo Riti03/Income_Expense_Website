@@ -1,11 +1,23 @@
 {% extends 'authbase.html' %} {% load static%} {% block content %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Playfair+Display:wght@700&display=swap');
 
-<div class="row h-100">
-  <div class="col-md-4"></div>
-  <div class="align-items-center col-md-4 d-flex justify-content-center">
-    <div class="card h-50 w-100">
+  .customfont{
+    font-family: 'Merriweather', serif;
+    font-family: 'Playfair Display', serif;
+    
+  }
+  </style>
+<div class="row h-100 w-100 d-flex align-items-center justify-content-center" style="background-color: black;">
+  <div class="col-md-6 w-50"><img src="{%static 'images/wallpaper.jpeg'%}" class="h-75 w-50 float-right" alt=""></div>
+  <div class="align-items-center col-md-6 d-flex  h-100 w-100">
+    <div class="card w-50 h-75" style="background-color: #e8e6e6;">
       <div class="card-body">
-        <div class="card-title py-3">
+        <div class="cardlogo d-flex align-items-center justify-content-center">
+          <img src="{% static 'img/logo.png' %}" width="50" height="45" />
+          <h4 class="customfont">Expenso</h4><br>
+        </div>
+        <div class="card-title py-2 mt-5">
           <h4>Register here!</h4>
         </div>
         <form action="{% url 'register' %}" method="post">
@@ -59,8 +71,8 @@
           />
         </form>
         <div class="container">
-          <span class="text-lead lead">Don't have any account?</span><a href="/authentication/register">Register</a><br>
-          <span class="text-lead lead">forget password?</span><a href="/authentication/request-reset-link">Reset it</a>
+          {% comment %} <span class="text-lead lead">Don't have any account?</span><a href="/authentication/register">Register</a><br> {% endcomment %}
+          <span class="text-lead lead customfont" style="font-size: small;" >Forgot password? </span><a href="/authentication/request-reset-link">Reset it</a>
         </div>
       </div>      
     </div>
