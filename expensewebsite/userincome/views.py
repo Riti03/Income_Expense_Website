@@ -111,7 +111,17 @@ def delete_income(request, id):
     income = UserIncome.objects.get(pk=id)
     income.delete()
     messages.success(request, 'Record removed')
-    return redirect('income')                       
+    return redirect('income')   
+
+
+
+#blog part starts here
+
+def blog_page(request):
+    return render(request, 'income/blog.html')
+    
+
+
 
 
 
