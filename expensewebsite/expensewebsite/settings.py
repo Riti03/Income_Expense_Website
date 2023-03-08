@@ -145,3 +145,4 @@ EMAIL_HOST_PASSWORD = 'tuwerkmavutzsfwt'
 
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
+
