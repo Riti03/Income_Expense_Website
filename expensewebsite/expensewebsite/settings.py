@@ -82,8 +82,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'incomeexpensedb',
-        'USER' : '',
-        'PASSWORD' : '',
+        'USER' : 'postgres',
+        'PASSWORD' : 'postgre@123',
         'HOST' : 'localhost',
     }
 }
@@ -137,8 +137,11 @@ MESSAGE_TAGS = {
 
 # email stuff
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''
+EMAIL_HOST_USER = 'ritimukherjee7@gmail.com'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = ''
+DEFAULT_FROM_EMAIL = 'ritimukherjee7@gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = 'tuwerkmavutzsfwt'
+
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
