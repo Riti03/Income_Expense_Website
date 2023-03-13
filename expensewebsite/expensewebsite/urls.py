@@ -23,6 +23,8 @@ urlpatterns = [
     path('income/', include('userincome.urls')),
 
     path('blog/', include('userincome.urls')),
+    path('consultancy/', include('userincome.urls')),
+
 
     path('admin/', admin.site.urls),
 

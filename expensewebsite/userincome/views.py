@@ -119,6 +119,10 @@ def delete_income(request, id):
 
 def blog_page(request):
     return render(request, 'income/blog.html')
+
+
+def consulting_page(request):
+    return render(request,'income/consilting.html')
     
 
 

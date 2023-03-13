@@ -11,6 +11,9 @@ urlpatterns = [
     path('income-delete/<int:id>', views.delete_income, name="income-delete"),
 
     path('blog-page/',views.blog_page,name='blog_page'),
+    
+    path('consulting-page/',views.consulting_page,name='consulting_page'),
+
 
     path('search-income', csrf_exempt(views.search_income),name="search_income"),
 
