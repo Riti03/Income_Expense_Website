@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Source,UserIncome
+from .models import *
 from django.core.paginator import Paginator 
 from django.http import JsonResponse
 import json
@@ -118,11 +118,23 @@ def delete_income(request, id):
 #blog part starts here
 
 def blog_page(request):
-    return render(request, 'income/blog.html')
+    allBlogs = blog.objects.all().order_by('-publishedat')
+    return render(request, 'income/blog.html',{'allBlogs':allBlogs})
 
 
 def consulting_page(request):
-    return render(request,'income/consilting.html')
+    free_cons = Consulting.objects.filter(price='free').exclude(booked=True)
+    paid_cons = Consulting.objects.exclude(price='free').exclude(booked=True)
+    booked = Consulting.objects.filter(booked=True)
+    context={
+        'free_cons':free_cons,
+        'paid_cons':paid_cons,
+        'booked':booked,
+    }
+    print(booked)
+
+
+    return render(request,'income/consilting.html',context)
     
 
 

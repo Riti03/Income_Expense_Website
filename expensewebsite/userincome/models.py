@@ -24,3 +24,25 @@ class Source(models.Model):
 
     def __str__(self):
         return self.name
+    
+class blog(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField(blank = False)
+    writer = models.CharField(max_length=255)
+    publishedat = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.title
+
+class Consulting(models.Model):
+    name = models.CharField(max_length=255)
+    designation = models.CharField(max_length=255)
+    exp = models.CharField(max_length=255)
+    price = models.CharField(max_length=255)
+    scheduledat= models.CharField(max_length=255)
+    booked = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+    
+
+

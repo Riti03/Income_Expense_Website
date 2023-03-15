@@ -2,58 +2,92 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-4">
+<div class="container mt-4 h-100">
+    
+    <!-- free consultancy -->
+    {% if free_cons.count > 0 %}
     <div class="row">
         <div class="row">
-            <h5 class="d-inline">Free Consultancy</h5>
+            <h5 class="d-inline font-weight-bold" style="padding-left: 15px;margin-bottom: 0rem;">Free Consultancy</h5>
         </div>
+        <hr class="w-100" style="margin-top: 0.3rem;">
         <div class="row">
+          {% for i in free_cons%}
             <div class="col-4">
                 <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title" style="font-weight: 600;">Dr.Dhawal Kulkarni</h5>
-                      <h6 class="card-subtitle mb-2">Phd in stock market from havard university</h6>
-                      <p class="card-text">6 years of experience in stock market field </p>
+                      <h5 class="card-title" style="font-weight: 600;">{{ i.name }}</h5>
+                      <h6 class="card-subtitle mb-2">{{ i.designation }}</h6>
+                      <p class="card-text mb-1">{{ i.exp }} </p>
+                      <p class="card-text mb-1">Schudeled at: {{ i.scheduledat }}</p>
                       <div class="d-flex justify-content-between align-items-center">
                         <span>Price: <span class="badge badge-success" style="border-radius: 5px;">Free</span></span>
-                        <a href="#" class="btn btn-primary float-right rounded">Book Now</a>
+                        <a href="#" class="btn btn-primary float-right rounded" style="font-size: 0.8275rem;padding: 0.1rem 0.7rem;">Book Now</a>
                       </div>
                     </div>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title" style="font-weight: 600;">Dr.Dhawal Kulkarni</h5>
-                      <h6 class="card-subtitle mb-2">Phd in stock market from havard university</h6>
-                      <p class="card-text">6 years of experience in stock market field </p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <span>Price: <span class="badge badge-success" style="border-radius: 5px;">Free</span></span>
-                        <a href="#" class="btn btn-primary float-right rounded">Book Now</a>
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title" style="font-weight: 600;">Dr.Dhawal Kulkarni</h5>
-                      <h6 class="card-subtitle mb-2">Phd in stock market from havard university</h6>
-                      <p class="card-text">6 years of experience in stock market field </p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <span>Price: <span class="badge badge-success" style="border-radius: 5px;">Free</span></span>
-                        <a href="#" class="btn btn-primary float-right rounded">Book Now</a>
-                      </div>
-                    </div>
-                </div>
-            </div>
+          {% endfor %}
         </div>
-         
     </div>
-    
+    {% endif %}
+    <!-- paid consultancy -->
+    {% if paid_cons.count > 0 %}
+    <div class="row mt-3">
+      <div class="row">
+          <h5 class="d-inline font-weight-bold" style="padding-left: 15px;margin-bottom: 0rem;">Paid Consultancy</h5>
+      </div>
+      <hr class="w-100" style="margin-top: 0.3rem;">
+      <div class="row">
+        {% for j in paid_cons%}
+          <div class="col-4">
+              <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title" style="font-weight: 600;">{{ j.name }}</h5>
+                    <h6 class="card-subtitle mb-2">{{ j.designation }}</h6>
+                    <p class="card-text mb-1">{{ j.exp }} </p>
+                    <p class="card-text mb-1">Scheduled at: {{ j.scheduledat }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <span>Price: {{ j.price }}</span>
+                      <a href="#" class="btn btn-primary float-right rounded" style="font-size: 0.8275rem;padding: 0.1rem 0.7rem;">Book Now</a>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        {% endfor %}  
+      </div>
+    </div>
+    {% endif %}
+    <!-- your bookings -->
+    {% if booked.count > 0 %}
+    <div class="row mt-3">
+      <div class="row">
+          <h5 class="d-inline font-weight-bold" style="padding-left: 15px;margin-bottom: 0rem;">Your bookings </h5>
+      </div>
+      <hr class="w-100" style="margin-top: 0.3rem;">
+      <div class="row">
+        {% for k in booked %}
+          <div class="col-4">
+              <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title" style="font-weight: 600;">{{ k.name }}</h5>
+                    <h6 class="card-subtitle mb-2">{{ k.designation }}</h6>
+                    <p class="card-text">{{ k.exp }} </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <span>Scheduled at: {{ k.scheduledat }} </span>
+                      <a href="#" class="btn btn-success float-right rounded" style="font-size: 0.8275rem;padding: 0.1rem 0.7rem;">Join</a>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
 </div>
 
-<script src="{%static 'js/searchIncome.js'%}"></script>
+<!-- <script src="{%static 'js/searchIncome.js'%}"></script> -->
+
 
 
 {% endblock %}
