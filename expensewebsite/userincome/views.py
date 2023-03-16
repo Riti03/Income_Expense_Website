@@ -142,9 +142,9 @@ def booking_page(request):
         dataidnum = request.POST.get('dataidnum')
         dataprice = request.POST.get('dataprice')
         dataprice = int(dataprice)
-        if dataprice == 0:
-            Consulting.objects.filter(id=dataidnum).update(booked=True)
-            return redirect('add-income')
+        # if dataprice == 0:
+        Consulting.objects.filter(id=dataidnum).update(booked=True)
+        return render(request,'income/consilting.html')
 
         # print(dataidnum,dataprice)
         # client = razorpay.Client(auth = (settings.KEY , settings.SECRET))
