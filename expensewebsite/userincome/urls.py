@@ -13,6 +13,8 @@ urlpatterns = [
     path('blog-page/',views.blog_page,name='blog_page'),
     
     path('consulting-page/',views.consulting_page,name='consulting_page'),
+    path('consulting-page/bookings/',views.booking_page,name='booking_page'),
+
 
 
     path('search-income', csrf_exempt(views.search_income),name="search_income"),

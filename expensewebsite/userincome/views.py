@@ -5,6 +5,9 @@ from .models import *
 from django.core.paginator import Paginator 
 from django.http import JsonResponse
 import json
+from django.views.decorators.csrf import csrf_exempt
+import razorpay
+from django.conf import settings
 # from .userpreferences.models import UserPreference
 # Create your views here.
 
@@ -131,10 +134,33 @@ def consulting_page(request):
         'paid_cons':paid_cons,
         'booked':booked,
     }
-    print(booked)
-
-
     return render(request,'income/consilting.html',context)
+
+@csrf_exempt
+def booking_page(request):
+    if request.method == 'POST':
+        dataidnum = request.POST.get('dataidnum')
+        dataprice = request.POST.get('dataprice')
+        dataprice = int(dataprice)
+        if dataprice == 0:
+            Consulting.objects.filter(id=dataidnum).update(booked=True)
+            return redirect('add-income')
+
+        # print(dataidnum,dataprice)
+        # client = razorpay.Client(auth = (settings.KEY , settings.SECRET))
+        # payment = client.order.create({'amount': dataprice * 100,'currency':'INR','payment_capture': 1})
+        # print("******")
+        # print(payment)
+        # print("*******")
+        # pay_id = payment['id']
+        # Consulting.objects.filter(id=dataidnum).update(razor_pay_order_id=pay_id)
+
+        # context={
+        #     'payment':payment
+        # }
+
+
+        # render(request,'income/consilting.html',context)
     
 
 
