@@ -11,9 +11,9 @@
             <h5 class="d-inline font-weight-bold" style="padding-left: 15px;margin-bottom: 0rem;">Free Consultancy</h5>
         </div>
         <hr class="w-100" style="margin-top: 0.3rem;">
-        <div class="row">
+        <div class="row w-100">
           {% for i in free_cons%}
-            <div class="col-4">
+            <div class="col-4" style="margin-bottom: 1rem;">
                 <div class="card">
                     <div class="card-body">
                       <h5 class="card-title" style="font-weight: 600;">{{ i.name }}</h5>
@@ -38,9 +38,9 @@
           <h5 class="d-inline font-weight-bold" style="padding-left: 15px;margin-bottom: 0rem;">Paid Consultancy</h5>
       </div>
       <hr class="w-100" style="margin-top: 0.3rem;">
-      <div class="row">
+      <div class="row w-100">
         {% for j in paid_cons%}
-          <div class="col-4">
+          <div class="col-4" style="margin-bottom: 1rem;">
               <div class="card">
                   <div class="card-body">
                     <h5 class="card-title" style="font-weight: 600;">{{ j.name }}</h5>
@@ -65,9 +65,9 @@
           <h5 class="d-inline font-weight-bold" style="padding-left: 15px;margin-bottom: 0rem;">Your bookings </h5>
       </div>
       <hr class="w-100" style="margin-top: 0.3rem;">
-      <div class="row">
+      <div class="row w-100">
         {% for k in booked %}
-          <div class="col-4">
+          <div class="col-4" style="margin-bottom: 1rem;">
               <div class="card">
                   <div class="card-body">
                     <h5 class="card-title" style="font-weight: 600;">{{ k.name }}</h5>
