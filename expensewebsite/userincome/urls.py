@@ -14,6 +14,8 @@ urlpatterns = [
     
     path('consulting-page/',views.consulting_page,name='consulting_page'),
     path('consulting-page/bookings/',views.booking_page,name='booking_page'),
+    path('consulting-page/checkout/<int:id>',views.checkout,name='checkout'),
+
 
 
 

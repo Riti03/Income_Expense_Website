@@ -22,7 +22,7 @@
                       <p class="card-text mb-1">Schudeled at: {{ i.scheduledat }}</p>
                       <div class="d-flex justify-content-between align-items-center">
                         <span>Price: <span class="badge badge-success" style="border-radius: 5px;">Free</span></span>
-                        <button href="#" id="rzp-button1" class="btn btn-primary float-right rounded" style="font-size: 0.8275rem;padding: 0.1rem 0.7rem;" data-price="0" data-id="{{ i.id }}" onclick="booknow(this)">Book Now</button>
+                        <button href="#" id="" class="btn btn-primary float-right rounded" style="font-size: 0.8275rem;padding: 0.1rem 0.7rem;" data-price="0" data-id="{{ i.id }}" onclick="booknow(this)">Book Now</button>
                       </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <p class="card-text mb-1">Scheduled at: {{ j.scheduledat }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                       <span>Price: {{ j.price }}</span>
-                      <button href="#" id="rzp-button1" class="btn btn-primary float-right rounded" style="font-size: 0.8275rem;padding: 0.1rem 0.7rem;" data-price="{{ j.price }}" data-id="{{ j.id }}" onclick="booknow(this)">Book Now</button>
+                      <a href="checkout/{{j.id}}" class="btn btn-primary float-right rounded" style="font-size: 0.8275rem;padding: 0.1rem 0.7rem;" data-price="{{ j.price }}" data-id="{{ j.id }}">Book Now</a>
                     </div>
                   </div>
               </div>
@@ -92,19 +92,21 @@
     dataidnum = e.getAttribute('data-id');
     dataprice= e.getAttribute('data-price');
     console.log(e.parentElement.parentElement.parentElement)
+    console.log(dataidnum)
+    console.log(dataprice)
+
 
     $.ajax({
           type:"POST",
           url:'bookings/' ,
           data: {
             'dataidnum':dataidnum,
-            'dataprice':dataprice,
           },
           // contentType:"application/json; charset=utf-8",
           // dataType:"json",
           success:function (msg) {
               // alert(msg.d);
-              
+              window.location.reload()
           },
           error:function (xhr, ajaxOptions, thrownError) {
               alert(xhr.status);
@@ -112,43 +114,9 @@
           }
     });
     
-
   }
+
 </script>
 
-<!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-  var options = {
-      "key": "rzp_test_WGnqEnGvEOb84z", // Enter the Key ID generated from the Dashboard
-      "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-      "currency": "INR",
-      "name": "Expenso",
-      "description": "Booking",
-      "image": "https://example.com/your_logo",
-      "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      "handler": function (response){
-          alert(response.razorpay_payment_id);
-          alert(response.razorpay_order_id);
-          alert(response.razorpay_signature)
-      },
-      "theme": {
-          "color": "#3399cc"
-      }
-  };
-  var rzp1 = new Razorpay(options);
-  rzp1.on('payment.failed', function (response){
-          alert(response.error.code);
-          alert(response.error.description);
-          alert(response.error.source);
-          alert(response.error.step);
-          alert(response.error.reason);
-          alert(response.error.metadata.order_id);
-          alert(response.error.metadata.payment_id);
-  });
-  document.getElementById('rzp-button1').onclick = function(e){
-      rzp1.open();
-      e.preventDefault();
-  }
-  </script> -->
 
 {% endblock %}

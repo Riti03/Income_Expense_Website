@@ -140,27 +140,37 @@ def consulting_page(request):
 def booking_page(request):
     if request.method == 'POST':
         dataidnum = request.POST.get('dataidnum')
-        dataprice = request.POST.get('dataprice')
-        dataprice = int(dataprice)
+        # dataprice = request.POST.get('dataprice')
+        # dataprice = int(dataprice)
+        # print(dataprice)
         # if dataprice == 0:
         Consulting.objects.filter(id=dataidnum).update(booked=True)
-        return render(request,'income/consilting.html')
-
-        # print(dataidnum,dataprice)
-        # client = razorpay.Client(auth = (settings.KEY , settings.SECRET))
-        # payment = client.order.create({'amount': dataprice * 100,'currency':'INR','payment_capture': 1})
-        # print("******")
-        # print(payment)
-        # print("*******")
-        # pay_id = payment['id']
-        # Consulting.objects.filter(id=dataidnum).update(razor_pay_order_id=pay_id)
-
-        # context={
-        #     'payment':payment
-        # }
+        # return render(request,'income/consilting.html')
+        return redirect('consulting_page')
 
 
-        # render(request,'income/consilting.html',context)
+
+
+def checkout(request,id):
+    get_details = Consulting.objects.filter(id=id)
+    get_pr = Consulting.objects.filter(id=id).values('price')
+
+    priceamo = int(list(get_pr)[0]['price'])
+    
+    client = razorpay.Client(auth = (settings.KEY , settings.SECRET))
+    payment = client.order.create({'amount': priceamo * 100,'currency':'INR','payment_capture': 1})
+    print("******")
+    print(payment)
+    print("*******")
+    pay_id = payment['id']
+    Consulting.objects.filter(id=id).update(razor_pay_order_id=pay_id)
+
+    context = {
+        'checkout_payment':get_details,
+        'payment':payment,
+    }
+    return render(request,'income/checkoutpage.html',context)
+
     
 
 
