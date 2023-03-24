@@ -8,6 +8,8 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 import razorpay
 from django.conf import settings
+from django_zoom_meetings import ZoomMeetings
+from datetime import datetime
 # from .userpreferences.models import UserPreference
 # Create your views here.
 
@@ -109,7 +111,7 @@ def income_edit(request, id):
         return redirect('income')
 
 
-
+@login_required
 def delete_income(request, id):
     income = UserIncome.objects.get(pk=id)
     income.delete()
@@ -120,11 +122,12 @@ def delete_income(request, id):
 
 #blog part starts here
 
+@login_required
 def blog_page(request):
     allBlogs = blog.objects.all().order_by('-publishedat')
     return render(request, 'income/blog.html',{'allBlogs':allBlogs})
 
-
+@login_required
 def consulting_page(request):
     free_cons = Consulting.objects.filter(price='free').exclude(booked=True)
     paid_cons = Consulting.objects.exclude(price='free').exclude(booked=True)
@@ -137,6 +140,7 @@ def consulting_page(request):
     return render(request,'income/consilting.html',context)
 
 @csrf_exempt
+@login_required
 def booking_page(request):
     if request.method == 'POST':
         dataidnum = request.POST.get('dataidnum')
@@ -150,7 +154,7 @@ def booking_page(request):
 
 
 
-
+@login_required
 def checkout(request,id):
     get_details = Consulting.objects.filter(id=id)
     get_pr = Consulting.objects.filter(id=id).values('price')
@@ -170,6 +174,103 @@ def checkout(request,id):
         'payment':payment,
     }
     return render(request,'income/checkoutpage.html',context)
+
+
+
+
+#meeting list
+
+
+def meetinglist(request):
+    if request.user.is_superuser:
+        all_meetings = Consulting.objects.all()
+        context={
+            'allmettings':all_meetings,
+        }
+        return render(request,'income/meetinglist.html',context)
+    
+
+
+zoom_api_key = settings.ZOOM_API_KEY
+zoom_api_secret = settings.ZOOM_API_SECRET
+zoom_email = settings.ZOOM_EMAIL_ID
+
+def createmeetingin(request):
+    if request.method == 'POST':
+        idmet = request.POST['id']
+        topic = request.POST['topic']
+        scheduledtime = request.POST['scheduledtime']
+        duration = request.POST['duration']
+        password = request.POST['password']
+
+        scheduledtime = scheduledtime+":00Z"
+        # print(scheduledtime)
+        # 2021-05-10T12:10:10Z
+        scheduledtime=datetime.strptime(scheduledtime, '%Y-%m-%dT%H:%M:%SZ')
+    
+
+        my_zoom = ZoomMeetings(zoom_api_key,zoom_api_secret,zoom_email)
+
+        create_meeting = my_zoom.CreateMeeting(scheduledtime,topic,duration,password)
+
+        
+        print(create_meeting['id'],create_meeting['start_url'],create_meeting['join_url'])
+        # print(create_meeting)
+
+        Consulting.objects.filter(id=idmet).update(scheduledat=scheduledtime,meduration=duration,zoomlink=create_meeting['join_url'],meetingid=create_meeting['id'])
+
+        return redirect('meetinglist')
+    
+
+def cancelmeetingin(request):
+    if request.method == 'POST':
+        iddel = request.POST['id']
+        meetid = Consulting.objects.filter(id=iddel).values('meetingid')
+        str_meeting_id=str(list(meetid)[0]['meetingid'])
+        # print(str_meeting_id)
+
+        my_zoom = ZoomMeetings(zoom_api_key,zoom_api_secret,zoom_email)
+
+        delete_meeting = my_zoom.DeletMeeting(str_meeting_id)
+
+        Consulting.objects.filter(id=iddel).delete()
+
+        print(delete_meeting)
+
+        return redirect('meetinglist')
+    
+def meetingdetails(request):    
+    if request.method == 'GET':
+        dataid = request.GET['dataidnum']
+        meetingid = str(list(Consulting.objects.filter(id=dataid).values('meetingid'))[0]['meetingid'])
+        # print(meetingid)
+        my_zoom = ZoomMeetings(zoom_api_key,zoom_api_secret,zoom_email)
+        get_meeting = my_zoom.GetMeeting(meetingid)
+        # print(get_meeting)
+        topic = get_meeting['topic']
+        createdat = get_meeting['created_at']
+        scheduledat = get_meeting['start_time']
+        duration = get_meeting['duration']
+        status = get_meeting['status']
+        startlink = get_meeting['start_url']
+        joinlink = get_meeting['join_url']
+        password = get_meeting['password']
+
+        data = {
+            'meetingid': meetingid,
+            'topic': topic,
+            'createdat': createdat,
+            'scheduledat': scheduledat,
+            'duration': duration,
+            'status': status,
+            'startlink': startlink,
+            'joinlink': joinlink,
+            'password': password,
+
+        }
+        return JsonResponse(data)
+        
+
 
     
 

@@ -113,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -149,3 +149,6 @@ DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 KEY = 'rzp_test_WGnqEnGvEOb84z'
 SECRET = 'HJuv3pBSYIRElIGPSUMIT1Be'
 
+ZOOM_API_KEY ='9ElaDDmkRri3vJMEjFKC3Q'
+ZOOM_API_SECRET = 'PdR6KvogTJ2Q8hZwOJBG3qP6Gl9iFDQWbURG'
+ZOOM_EMAIL_ID = 'nirbanpaul007@gmail.com'

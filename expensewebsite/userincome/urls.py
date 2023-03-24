@@ -16,6 +16,15 @@ urlpatterns = [
     path('consulting-page/bookings/',views.booking_page,name='booking_page'),
     path('consulting-page/checkout/<int:id>',views.checkout,name='checkout'),
 
+    path('meetinglist/',views.meetinglist,name='meetinglist'),
+    path('meetinglist/createmeeting',views.createmeetingin,name='createmeeting'),
+    path('meetinglist/cancelmeeting',views.cancelmeetingin,name='cancelmeeting'),
+    path('meetinglist/meetingdetails/',views.meetingdetails,name='meetingdetails'),
+
+
+
+
+
 
 
 
