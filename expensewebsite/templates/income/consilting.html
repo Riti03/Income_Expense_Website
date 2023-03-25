@@ -75,7 +75,11 @@
                     <p class="card-text">{{ k.exp }} </p>
                     <div class="d-flex justify-content-between align-items-center">
                       <span>Scheduled at: {{ k.scheduledat }} </span>
+                      {% if k.zoomlink is None %}
+                      <a href="" class="btn btn-info float-right rounded" style="font-size: 0.8275rem;padding: 0.1rem 0.7rem;">Wait</a>
+                      {% else %}
                       <a href="{{k.zoomlink}}" class="btn btn-success float-right rounded" style="font-size: 0.8275rem;padding: 0.1rem 0.7rem;">Join</a>
+                      {% endif %}
                     </div>
                   </div>
               </div>

@@ -38,7 +38,7 @@ class Consulting(models.Model):
     designation = models.CharField(max_length=255)
     exp = models.CharField(max_length=255)
     price = models.CharField(max_length=255)
-    scheduledat= models.CharField(max_length=255)
+    scheduledat= models.CharField(max_length=255,default='2023-03-26 18:00')
     booked = models.BooleanField(default=False)
     meduration= models.CharField(max_length=255,default=1,null=False)
     razor_pay_order_id = models.CharField(max_length = 100 , null=True , blank=True)
