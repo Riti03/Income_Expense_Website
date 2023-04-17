@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="container">
+
     <div id="myModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -61,11 +62,15 @@
       "handler": function (response){
         $('#myModal').modal('hide');
         dataid = $('#getiddata').html()
+        dataprice="{{payment.amount}}"
+        orderid="{{payment.id}}"
         $.ajax({
             type:"POST",
             url:'/consultancy/consulting-page/bookings/' ,
             data: {
                 'dataidnum':dataid,
+                'dataprice':dataprice,
+                'orderid':orderid,
             },
             // contentType:"application/json; charset=utf-8",
             // dataType:"json",

@@ -129,13 +129,25 @@ def blog_page(request):
 
 @login_required
 def consulting_page(request):
-    free_cons = Consulting.objects.filter(price='free').exclude(booked=True)
-    paid_cons = Consulting.objects.exclude(price='free').exclude(booked=True)
-    booked = Consulting.objects.filter(booked=True)
+    all_cons=Consulting.objects.all()
+    booked = Booking.objects.filter(client=request.user).values('consulting')
+    bl=list(booked)
+    bliids=[ele['consulting'] for ele in bl]
+    bookdet=[]
+    for i in bliids:
+        bookdet.append(Consulting.objects.get(id=i))
+    free_cons_li=[]
+    paid_cons_li=[]
+    for fr in all_cons:
+        if not fr.id in bliids:
+            if fr.price.lower()=='free':
+                free_cons_li.append(Consulting.objects.get(id=fr.id))
+            else:
+                paid_cons_li.append(Consulting.objects.get(id=fr.id))
     context={
-        'free_cons':free_cons,
-        'paid_cons':paid_cons,
-        'booked':booked,
+        'free_cons':free_cons_li,
+        'paid_cons':paid_cons_li,
+        'bookdet':bookdet,
     }
     return render(request,'income/consilting.html',context)
 
@@ -144,12 +156,17 @@ def consulting_page(request):
 def booking_page(request):
     if request.method == 'POST':
         dataidnum = request.POST.get('dataidnum')
+        consiltingid = Consulting.objects.get(id=dataidnum) 
+        datapricenum = request.POST.get('dataprice')
+        orderid= request.POST.get('orderid')
+        owner=request.user
         # dataprice = request.POST.get('dataprice')
         # dataprice = int(dataprice)
         # print(dataprice)
         # if dataprice == 0:
-        Consulting.objects.filter(id=dataidnum).update(booked=True)
+        # Consulting.objects.filter(id=dataidnum).update(booked=True)
         # return render(request,'income/consilting.html')
+        Booking.objects.create(client=owner,consulting=consiltingid,fee=datapricenum,razor_pay_order_id=orderid)
         return redirect('consulting_page')
 
 
@@ -167,7 +184,7 @@ def checkout(request,id):
     print(payment)
     print("*******")
     pay_id = payment['id']
-    Consulting.objects.filter(id=id).update(razor_pay_order_id=pay_id)
+    # Consulting.objects.filter(id=id).update(razor_pay_order_id=pay_id)
 
     context = {
         'checkout_payment':get_details,

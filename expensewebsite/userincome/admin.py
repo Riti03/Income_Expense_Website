@@ -6,3 +6,5 @@ admin.site.register(UserIncome)
 admin.site.register(Source)
 admin.site.register(blog)
 admin.site.register(Consulting)
+admin.site.register(Booking)
+
