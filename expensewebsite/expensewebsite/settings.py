@@ -21,7 +21,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '3i0_7vael5b9k3^+4ics#v4lq=2wk5_)+#1037w%7&f!xe)@vb'
+# put your screct key
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,11 +81,12 @@ WSGI_APPLICATION = 'expensewebsite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'incomeexpensedb',
-        'USER' : 'postgres',
-        'PASSWORD' : 'postgre@123',
-        'HOST' : 'localhost',
+        # write your engine, databasename, usedid, password, host. 
+        'ENGINE': '',
+        'NAME': '',
+        'USER' : '',
+        'PASSWORD' : '',
+        'HOST' : '',
     }
 }
 
@@ -136,19 +138,20 @@ MESSAGE_TAGS = {
 
 
 # email stuff
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ritimukherjee7@gmail.com'
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'ritimukherjee7@gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_PASSWORD = 'tuwerkmavutzsfwt'
+# put your EMAIL_HOST, EMAIL_HOST_USER, EMAIL_USE_TLS, DEFAULT_FROM_EMAIL, EMAIL_PORT, EMAIL_HOST_PASSWORD   
+EMAIL_HOST = ''
+EMAIL_HOST_USER = ''
+EMAIL_USE_TLS = 
+DEFAULT_FROM_EMAIL = ''
+EMAIL_PORT = 
+EMAIL_HOST_PASSWORD = ''
 
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 
-KEY = 'rzp_test_WGnqEnGvEOb84z'
-SECRET = 'HJuv3pBSYIRElIGPSUMIT1Be'
+KEY = ''
+SECRET = ''
 
-ZOOM_API_KEY ='9ElaDDmkRri3vJMEjFKC3Q'
-ZOOM_API_SECRET = 'PdR6KvogTJ2Q8hZwOJBG3qP6Gl9iFDQWbURG'
-ZOOM_EMAIL_ID = 'nirbanpaul007@gmail.com'
+ZOOM_API_KEY =''
+ZOOM_API_SECRET = ''
+ZOOM_EMAIL_ID = ''
